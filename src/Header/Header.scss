@@ -1,0 +1,23 @@
+#header {
+    background-color: rgba(12, 112, 242, 1);
+    padding-top: 20px;
+    padding-left: 5%;
+    display: flex;
+    gap: 30px;
+
+    height: 49px;
+
+    text-align: center;
+    align-items: center;
+
+    span {
+        background-color: rgba(255, 255, 255, 1);
+        color: rgba(12, 112, 242, 1);
+        display: inline;
+        border-radius: 10px 10px 0px 0px;
+
+        padding: 5px 25px;
+        align-items: center;
+    }
+}
+

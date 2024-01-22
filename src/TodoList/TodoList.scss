@@ -1,0 +1,90 @@
+#todo-list {
+    width: 100%;
+    height: calc(100vh - 70px);
+
+    background-color: rgba(45, 45, 45, 1);
+
+    .title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        padding-top: 140px;
+    }
+
+    table {
+        width: 50%;
+        margin: auto;
+        margin-top: 100px;
+        font-family: "Raleway";
+
+
+        thead tr,
+        tbody tr {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            font-weight: 600;
+            font-size: 1.6rem;
+
+            align-items: center;
+        }
+
+        thead::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: rgba(217, 217, 217, 1);
+
+            position: relative;
+            top: 20px;
+        }
+
+        tbody {
+            position: relative;
+            top: 40px;
+        }
+
+        th,
+        td {
+            width: 200px;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        td {
+            font-weight: 400;
+        }
+
+        input {
+            background-color: rgba(45, 45, 45, 1);
+            border: 0px;
+            color: rgba(217, 217, 217, 1);
+
+            font-family: "Raleway";
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input::placeholder {
+            font-style: italic;
+        }
+    }
+}
