@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./TodoList.scss";
+
 import Checkbox from "../Components/Checkbox/Checkbox";
 import EditButton from "../Components/EditButton/EditButton";
 import DeleteButton from "../Components/DeleteButton/DeleteButton";
@@ -16,19 +17,36 @@ function TodoList() {
     },
   ]);
   const [todoInput, setTodoInput] = useState("");
+  const [todoSelectedIndex, setTodoSelectedIndex] = useState(null);
 
-  const onClickEdit = () => {
+  const onClickEdit = (index) => {
     setIsModalOpen(true);
     setIsEdit(true);
+    setTodoSelectedIndex(index);
   };
 
-  const onClickDelete = () => {
+  const onClickDelete = (index) => {
     setIsModalOpen(true);
     setIsEdit(false);
+    setTodoSelectedIndex(index);
   };
 
-  const onCloseModal = () => {
+  const onCloseModal = (isConfirm, todoNameEdit) => {
     setIsModalOpen(false);
+
+    if (isConfirm) {
+      if (isEdit) {
+        const newTodoList = [...todoList];
+        newTodoList[todoSelectedIndex].name = todoNameEdit;
+
+        setTodoList(newTodoList);
+      } else {
+        const newTodoList = [...todoList];
+        newTodoList.splice(todoSelectedIndex, 1);
+
+        setTodoList(newTodoList);
+      }
+    }
   };
 
   const onClickAdd = () => {
@@ -52,14 +70,28 @@ function TodoList() {
   };
 
   const onTodoInputKeyUp = (e) => {
-    if (e.key === 'Enter') {
-      onClickAdd()
+    if (e.key === "Enter") {
+      onClickAdd();
     }
+  };
+
+  const onCheck = (index, isChecked) => {
+    const newTodoList = [...todoList];
+    newTodoList[index].done = isChecked;
+
+    setTodoList(newTodoList);
   }
 
   return (
     <div id="todo-list">
-      <Modal isOpen={isModalOpen} isEdit={isEdit} onCloseModal={onCloseModal} />
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          isEdit={isEdit}
+          selectedTodo={todoList[todoSelectedIndex]}
+          onCloseModal={onCloseModal}
+        />
+      )}
       <div className="title">
         Otimize seu tempo e se organize com o nosso Planejador Diário.
       </div>
@@ -74,14 +106,14 @@ function TodoList() {
         <tbody>
           {todoList.map((item, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td className="left">{item.name}</td>
                 <td className="center">
-                  <Checkbox isChecked={item.done} />
+                  <Checkbox isChecked={item.done} onCheck={(isChecked) => onCheck(index, isChecked)} />
                 </td>
                 <td className="right">
-                  <EditButton onClick={onClickEdit} />
-                  <DeleteButton onClick={onClickDelete} />
+                  <EditButton onClick={() => onClickEdit(index)} />
+                  <DeleteButton onClick={() => onClickDelete(index)} />
                 </td>
               </tr>
             );

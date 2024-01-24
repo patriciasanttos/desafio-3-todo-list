@@ -71,5 +71,34 @@
         background-color: rgb(232, 232, 232);
     }
 
+    .input-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
 
+        input {
+            width: 430px;
+            border: 0px;
+            border-bottom: 1px solid;
+            color: rgba(0, 0, 0, 0.5);
+
+            font-family: "Raleway";
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        input:focus {
+            outline: none;
+        }
+    }
+
+    .todo-name {
+        font-weight: 400;
+        font-size: 1.5rem;
+        color: rgba(0, 0, 0, 1);
+        text-align: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
 }
